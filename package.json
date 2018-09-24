@@ -1,0 +1,51 @@
+{
+    "name": "idle-utils",
+    "version": "0.0.1",
+    "description": "",
+    "author": "Igor Emets <ya.peren@yandex.ru>",
+    "license": "WTFPL",
+    "main": "./lib/index.js",
+    "typings": "./lib/index.d.ts",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prettier": "prettier --write *.js **/*.js **/*.ts",
+        "precommit": "lint-staged",
+        "tslint": "tslint -c tslint.json -p tsconfig.json",
+        "eslint": "eslint .",
+        "test": "jest",
+        "clean": "rm -rf lib",
+        "clean-specs": "find lib -type f -name '*.spec.js' -delete",
+        "prepack": "yarn clean && yarn build && yarn clean-specs",
+        "patch": "yarn version --new-version patch && npm publish",
+        "minor": "yarn version --new-version minor && npm publish"
+    },
+    "dependencies": {
+        "idle-callback": "^1.0.3"
+    },
+    "devDependencies": {
+        "@types/jest": "^23.3.2",
+        "eslint": "^5.6.0",
+        "eslint-plugin-prettier": "^2.6.2",
+        "husky": "^0.14.3",
+        "jest": "^23.6.0",
+        "lint-staged": "^7.3.0",
+        "prettier": "^1.14.3",
+        "ts-jest": "^23.10.0",
+        "tslib": "^1.9.3",
+        "tslint": "^5.11.0",
+        "tslint-eslint-rules": "^5.4.0",
+        "tslint-microsoft-contrib": "^5.2.1",
+        "tslint-plugin-prettier": "^1.3.0",
+        "typescript": "^3.0.3",
+        "vrsource-tslint-rules": "^5.8.2"
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx}": [
+            "npm run prettier",
+            "git add"
+        ]
+    }
+}

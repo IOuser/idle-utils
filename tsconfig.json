@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "noUnusedLocals": true,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "target": "esnext",
+        "module": "esnext",
+        "rootDir": "src",
+        "baseUrl": "src",
+        "outDir": "lib",
+        "typeRoots": [
+            "src/definitions",
+            "node_modules/@types"
+        ]
+    },
+    "include": [
+        "src",
+        "src/definitions"
+    ]
+}
