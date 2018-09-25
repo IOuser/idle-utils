@@ -45,17 +45,8 @@ export class Job<T, S> implements IJob, IDestroyable {
     }
 
     public cancel(): void {
-        const idleCallbackId = this._idleCallbackId;
-        if (idleCallbackId !== null) {
-            cancelIdleCallback(idleCallbackId);
-            this._idleCallbackId = null;
-        }
-
-        const animationFrameId = this._animationFrameId;
-        if (animationFrameId !== null) {
-            cancelAnimationFrame(animationFrameId);
-            this._animationFrameId = null;
-        }
+        this._cancelIdleCallback();
+        this._cancelAnimationFrame();
     }
 
     public destroy(): void {
@@ -65,6 +56,22 @@ export class Job<T, S> implements IJob, IDestroyable {
 
     public isPerforming(): boolean {
         return this._idleCallbackId !== null || this._animationFrameId !== null;
+    }
+
+    private _cancelIdleCallback(): void {
+        const idleCallbackId = this._idleCallbackId;
+        if (idleCallbackId !== null) {
+            cancelIdleCallback(idleCallbackId);
+            this._idleCallbackId = null;
+        }
+    }
+
+    private _cancelAnimationFrame(): void {
+        const animationFrameId = this._animationFrameId;
+        if (animationFrameId !== null) {
+            cancelAnimationFrame(animationFrameId);
+            this._animationFrameId = null;
+        }
     }
 
     private _perform = (deadline: IdleDeadline) => {
