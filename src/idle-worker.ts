@@ -109,14 +109,15 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
 
     private _schedulePerform(): void {
         if (this._performCallbackId === null) {
-            this._performCallbackId = requestIdleCallback(this._perform, { timeout: 250 });
+            const { timeout } = this._options;
+            this._performCallbackId = requestIdleCallback(this._perform, { timeout });
         }
     }
 
     private _cancelPerformCallback(): void {
-        const idleCallbackId = this._performCallbackId;
-        if (idleCallbackId !== null) {
-            cancelIdleCallback(idleCallbackId);
+        const performCallbackId = this._performCallbackId;
+        if (performCallbackId !== null) {
+            cancelIdleCallback(performCallbackId);
             this._clearPerformCallback();
         }
     }
@@ -126,9 +127,9 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
     }
 
     private _cancelCommitCallback(): void {
-        const animationFrameId = this._commitCallbackId;
-        if (animationFrameId !== null) {
-            cancelAnimationFrame(animationFrameId);
+        const commitCallbackId = this._commitCallbackId;
+        if (commitCallbackId !== null) {
+            cancelAnimationFrame(commitCallbackId);
             this._clearCommitCallback();
         }
     }
