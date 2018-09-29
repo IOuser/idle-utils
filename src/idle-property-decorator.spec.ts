@@ -11,7 +11,20 @@ describe('IdleProperty', () => {
         expect(a.prop).toEqual(42);
     });
 
-    it('should decorate property', () => {
+    it('should decorate property and evaluate when idle', () => {
+        jest.useFakeTimers();
+        class A {
+            @idleProperty(() => 42)
+            public prop!: number;
+        }
+
+        const a = new A();
+        jest.runAllTimers();
+
+        expect(a.prop).toEqual(42);
+    });
+
+    it('should destruct idle property after assigning new value to property', () => {
         class A {
             @idleProperty(() => 42)
             public prop!: number;
