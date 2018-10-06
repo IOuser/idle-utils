@@ -151,7 +151,7 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
     }
 
     private _clearCommitCallback(): void {
-        this._performCallbackId = null;
+        this._commitCallbackId = null;
     }
 
     // TODO: Improve commit logic by adding two commit strategies
