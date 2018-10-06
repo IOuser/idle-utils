@@ -18,7 +18,7 @@
         "test": "jest",
         "coverage": "jest --coverage && codecov",
         "clean": "rm -rf lib",
-        "clean-specs": "find lib -type f -name '*.spec.js' -delete",
+        "clean-specs": "find lib -type f -name *.spec.* -delete",
         "prepack": "yarn clean && yarn build && yarn clean-specs",
         "patch": "yarn version --new-version patch && npm publish",
         "minor": "yarn version --new-version minor && npm publish"
