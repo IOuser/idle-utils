@@ -10,4 +10,9 @@ module.exports = {
     testMatch: ['**/*.spec.(ts|tsx|js)'],
     testPathIgnorePatterns: ['<rootDir>/(lib|dest|dist)/'],
     transformIgnorePatterns: ['<rootDir>/node_modules/(?!idle-callback).+\\.js$'],
+    globals: {
+        'ts-jest': {
+            tsConfig: 'tests/tsconfig.test.json',
+        },
+    },
 };

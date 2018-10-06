@@ -40,6 +40,11 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
         this._state = options.initState();
     }
 
+    public destroy(): void {
+        this.stop();
+        delete this._options;
+    }
+
     public start(): void {
         if (this.isRunning()) {
             this.stop();
@@ -48,7 +53,7 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
         // TODO: Should enqueue prePerformCallback?
         const { prePerformCallback } = this._options;
         if (prePerformCallback !== undefined) {
-            prePerformCallback.call(this._options);
+            prePerformCallback();
         }
 
         this._schedulePerform();
@@ -63,9 +68,20 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
         return this._performCallbackId !== null || this._commitCallbackId !== null;
     }
 
-    public destroy(): void {
-        this.stop();
-        delete this._options;
+    public setTasks(tasks: T[]): void {
+        this._tasks = tasks;
+    }
+
+    public getTasks(): T[] {
+        return this._tasks;
+    }
+
+    public setState(state: S): void {
+        this._state = state;
+    }
+
+    public getState(): S {
+        return this._state;
     }
 
     private _perform = (deadline: IdleDeadline) => {
