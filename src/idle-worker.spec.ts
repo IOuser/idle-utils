@@ -25,11 +25,11 @@ describe('IdleWorker', () => {
         jest.runAllTimers();
 
         expect(performCallback).toBeCalledTimes(5);
-        expect(performCallback).toHaveBeenNthCalledWith(1, 1, []);
-        expect(performCallback).toHaveBeenNthCalledWith(2, 2, []);
-        expect(performCallback).toHaveBeenNthCalledWith(3, 3, []);
-        expect(performCallback).toHaveBeenNthCalledWith(4, 4, []);
-        expect(performCallback).toHaveBeenNthCalledWith(5, 5, []);
+        expect(performCallback).toHaveBeenNthCalledWith(1, 1, [], worker);
+        expect(performCallback).toHaveBeenNthCalledWith(2, 2, [], worker);
+        expect(performCallback).toHaveBeenNthCalledWith(3, 3, [], worker);
+        expect(performCallback).toHaveBeenNthCalledWith(4, 4, [], worker);
+        expect(performCallback).toHaveBeenNthCalledWith(5, 5, [], worker);
 
         expect(commitCallback).toHaveBeenCalledWith([]);
 

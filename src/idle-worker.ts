@@ -17,7 +17,7 @@ export type IdleWorkerOptions<T, S> = {
     initTasks: () => T[];
     initState: () => S;
     prePerformCallback?: () => void;
-    performCallback: (task: T, state: S) => void;
+    performCallback: (task: T, state: S, context: IdleWorker<T, S>) => void;
     commitCallback: (state: S) => void;
     postCommitCallback?: (state: S) => void;
 };
@@ -85,7 +85,7 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
     }
 
     public endPerform(): void {
-        this._tasks = [];
+        this.setTasks([]);
     }
 
     private _perform = (deadline: IdleDeadline) => {
@@ -101,7 +101,7 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
                 continue;
             }
 
-            performCallback(task, state);
+            performCallback(task, state, this);
             this._scheduleCommit();
         }
 
