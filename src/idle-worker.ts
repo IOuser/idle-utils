@@ -6,7 +6,7 @@ const enum Constants {
     Timeout = 250,
 }
 
-export interface IIdleWorker {
+export interface IIdleWorker extends IDestroyable {
     start(): void;
     stop(): void;
     isRunning(): boolean;
@@ -82,6 +82,10 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
 
     public getState(): S {
         return this._state;
+    }
+
+    public endPerform(): void {
+        this._tasks = [];
     }
 
     private _perform = (deadline: IdleDeadline) => {
