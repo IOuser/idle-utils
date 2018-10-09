@@ -33,6 +33,7 @@ export class CompoundIdleWorker<T, S> implements IIdleWorker, IDestroyable {
     }
 
     public start(): void {
+        this._state = null;
         this._commitCounter = 0;
         this._postCommitCounter = 0;
 
