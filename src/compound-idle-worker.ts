@@ -30,6 +30,7 @@ export class CompoundIdleWorker<T, S> implements IIdleWorker, IDestroyable {
         this._workers.forEach((worker: IdleWorker<T, S>) => worker.destroy());
         delete this._workers;
         delete this._options;
+        delete this._state;
     }
 
     public start(): void {
