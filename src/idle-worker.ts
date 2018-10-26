@@ -102,12 +102,14 @@ export class IdleWorker<T, S> implements IIdleWorker, IDestroyable {
             }
 
             performCallback(task, state, this);
-            this._scheduleCommit();
         }
 
         if (this._hasPendingTasks()) {
             this._schedulePerform();
+            return;
         }
+
+        this._scheduleCommit();
     };
 
     private _shouldPerform(deadline: IdleDeadline, minTaskTime: number = 0): boolean {
