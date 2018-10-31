@@ -9,7 +9,7 @@
         "moduleResolution": "node",
         "strict": true,
         "esModuleInterop": true,
-        "target": "esnext",
+        "target": "es5",
         "module": "esnext",
         "rootDir": "src",
         "baseUrl": "src",
